@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Slot Booking System</title>
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --secondary: #6366F1;
+      --bg: #f4f6f9;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: #eef2ff;
+      color: var(--primary);
+    }
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--secondary); }
+    .btn-danger {
+      background: #ef4444;
+      color: #fff;
+    }
+    .btn-danger:hover { background: #dc2626; }
+    .auth-wrap {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+    .card {
+      width: min(100%, 440px);
+      background: var(--card);
+      padding: 24px;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.7rem;
+      text-align: center;
+    }
+    .sub {
+      margin: 0 0 20px;
+      color: var(--muted);
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+      font: inherit;
+      background: #fff;
+    }
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+    }
+    .footer-link {
+      text-align: center;
+      margin-top: 14px;
+      color: var(--muted);
+    }
+    .footer-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="logo"><span class="logo-dot"></span>Slot Booking System</a>
+      <nav class="nav-links">
+        {% if user.is_authenticated %}
+        <a href="{% url 'my_bookings' %}">My Bookings</a>
+        <form action="{% url 'logout' %}" method="post" style="margin:0;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}" class="active">Login</a>
+        <a href="/register/" class="btn btn-primary">Register</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-wrap">
+    <section class="card">
+      <h1>Login</h1>
+      <p class="sub">Access your booking dashboard</p>
+
+      {% if form.errors %}
+      <div class="error">Invalid username or password.</div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" placeholder="Enter username" required />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" placeholder="Enter password" required />
+
+        <button type="submit" class="btn btn-primary" style="width:100%;">Login</button>
+      </form>
+
+      <p class="footer-link">New user? <a href="/register/">Create account</a></p>
+    </section>
+  </main>
+</body>
+</html>
