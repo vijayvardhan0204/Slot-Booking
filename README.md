@@ -12,7 +12,7 @@ A Django-based web application that allows users to book available slots.
 ## Tech Stack
 - Python
 - Django
-- SQLite
+- mySQL
 - HTML/CSS
 
 ## Setup

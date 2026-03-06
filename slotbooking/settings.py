@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'slotbooking.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'slotbooking_db',
+        'USER': 'root',
+        'PASSWORD': 'v@bfrdssv4',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -117,5 +121,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'login'

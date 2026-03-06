@@ -1,198 +1,101 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register | Slot Booking System</title>
-  <style>
-    :root {
-      --primary: #4F46E5;
-      --secondary: #6366F1;
-      --bg: #f4f6f9;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --card: #ffffff;
-      --border: #e5e7eb;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .logo {
-      font-weight: 700;
-      color: var(--text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #374151;
-      font-weight: 600;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: #eef2ff;
-      color: var(--primary);
-    }
-    .btn {
-      border: none;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
-    .btn-primary:hover { background: var(--secondary); }
-    .btn-danger {
-      background: #ef4444;
-      color: #fff;
-    }
-    .btn-danger:hover { background: #dc2626; }
-    .auth-wrap {
-      min-height: calc(100vh - 74px);
-      display: grid;
-      place-items: center;
-      padding: 20px;
-    }
-    .card {
-      width: min(100%, 500px);
-      background: var(--card);
-      padding: 24px;
-      margin-top: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.7rem;
-      text-align: center;
-    }
-    .sub {
-      margin: 0 0 20px;
-      color: var(--muted);
-      text-align: center;
-    }
-    form p {
-      margin: 0 0 14px;
-      display: grid;
-      gap: 6px;
-    }
-    label {
-      font-size: 0.92rem;
-      font-weight: 600;
-    }
-    input {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      font: inherit;
-      background: #fff;
-    }
-    .helptext {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    ul.errorlist {
-      margin: 0;
-      padding: 8px 10px;
-      list-style: none;
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fecaca;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
-    .footer-link {
-      text-align: center;
-      margin-top: 14px;
-      color: var(--muted);
-    }
-    .footer-link a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'booking/styles.css' %}">
 </head>
 <body>
-  <header class="navbar">
-    <div class="nav-inner">
-      <a href="/" class="logo"><span class="logo-dot"></span>Slot Booking System</a>
-      <nav class="nav-links">
-        {% if user.is_authenticated %}
-        <a href="{% url 'my_bookings' %}">My Bookings</a>
-        <form action="{% url 'logout' %}" method="post" style="margin:0;">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
-        {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="/register/" class="active">Register</a>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a href="/" class="brand"><span class="brand-mark"></span>Slot Booking System</a>
+        <nav class="nav-links">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+          <a class="nav-link active" href="/register/">Register</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="auth-layout">
+      <section class="card auth-card">
+        <h1 class="section-title">Create your account</h1>
+        <p class="section-subtitle">Start booking slots in a few steps.</p>
+
+        {% if form.non_field_errors %}
+          <div class="alert">{{ form.non_field_errors|striptags }}</div>
         {% endif %}
-      </nav>
-    </div>
-  </header>
 
-  <main class="auth-wrap">
-    <section class="card">
-      <h1>Create Account</h1>
-      <p class="sub">Register to start booking slots</p>
+        <form method="post" class="form-grid">
+          {% csrf_token %}
 
-      <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary" style="width:100%;">Register</button>
-      </form>
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M4 20c1.7-3.3 4.4-5 8-5s6.3 1.7 8 5" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
+              </span>
+              <input id="name" name="name" type="text" class="form-control" placeholder="Your name" value="{{ form.name.value|default_if_none:'' }}" required />
+            </div>
+            {% if form.name.errors %}<p class="helper" style="color:#b91c1c;">{{ form.name.errors|striptags }}</p>{% endif %}
+          </div>
 
-      <p class="footer-link">Already registered? <a href="{% url 'login' %}">Login</a></p>
-    </section>
-  </main>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
+              </span>
+              <input id="email" name="email" type="email" class="form-control" placeholder="you@example.com" value="{{ form.email.value|default_if_none:'' }}" required />
+            </div>
+            {% if form.email.errors %}<p class="helper" style="color:#b91c1c;">{{ form.email.errors|striptags }}</p>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="password1" class="form-label">Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M8 10V8a4 4 0 1 1 8 0v2" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
+              </span>
+              <input id="password1" name="password1" type="password" class="form-control" placeholder="Create password" required />
+            </div>
+            {% if form.password1.errors %}<p class="helper" style="color:#b91c1c;">{{ form.password1.errors|striptags }}</p>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="password2" class="form-label">Confirm Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="4" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                  <path d="M8 10V8a4 4 0 1 1 8 0v2" stroke="currentColor" stroke-width="1.7"/>
+                </svg>
+              </span>
+              <input id="password2" name="password2" type="password" class="form-control" placeholder="Repeat password" required />
+            </div>
+            {% if form.password2.errors %}<p class="helper" style="color:#b91c1c;">{{ form.password2.errors|striptags }}</p>{% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+
+        <p class="muted-link">Already registered? <a href="{% url 'login' %}" class="text-link">Login</a></p>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
