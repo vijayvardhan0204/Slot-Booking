@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'slotbooking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'slotbooking_db',
-        'USER': 'root',
-        'PASSWORD': 'v@bfrdssv4',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.environ.get("MYSQLDATABASE"),
+        'USER': os.environ.get("MYSQLUSER"),
+        'PASSWORD': os.environ.get("MYSQLPASSWORD"),
+        'HOST': os.environ.get("MYSQLHOST"),
+        'PORT': os.environ.get("MYSQLPORT"),
     }
 }
 
